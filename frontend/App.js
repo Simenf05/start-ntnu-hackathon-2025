@@ -35,7 +35,9 @@ export default function App() {
                     brand={item.brand}
                     price={item.price}
                     count={item.count}
+                    checked={item.checked || false}
                     onChangeCount={(newCount) => handleChangeCount(item.id, newCount)}
+                    onToggleChecked={() => handleToggleChecked(item.id)}
                 />
             ))}
 

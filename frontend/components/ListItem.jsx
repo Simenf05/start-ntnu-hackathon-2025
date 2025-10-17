@@ -12,7 +12,7 @@ export default function ListItem(props) {
     // const toggleChecked = () => setChecked(!checked)
 
     const checked= props.checked
-    const onToggleChecked= () => props.onToggleChecked()
+    const onToggleChecked = () => props.onToggleChecked()
 
     // const incrementCount = () => setCount(count + 1)
     // const decrementCount = () => setCount(count - 1)
@@ -21,8 +21,8 @@ export default function ListItem(props) {
         <View style={[styles.tile, {backgroundColor: checked ? "#eee" : "#fff"}]}>
             <View style={[styles.checkbox, styles.general, ]}>
                 <CheckBox
-                    onPress={() => toggleChecked()}
-                    checked={checked}
+                    onPress={props.onToggleChecked}
+                    checked={props.checked}
                     size={36}
                     checkedIcon="check-square"
                     uncheckedIcon="square"
