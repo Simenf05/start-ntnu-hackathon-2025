@@ -1,12 +1,16 @@
 from flask import Flask, jsonify, request
 
 from recipes import recipes_bp
+from barcode import barcode_bp 
 
 
 app = Flask(__name__)
 
 # Register blueprints
 app.register_blueprint(recipes_bp, url_prefix='/api')
+
+# Register blueprints
+app.register_blueprint(barcode_bp, url_prefix='/api')
 
 # Example route
 @app.route('/api/test', methods=['GET'])
