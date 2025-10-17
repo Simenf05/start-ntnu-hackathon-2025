@@ -15,8 +15,10 @@ def get_by_id(id):
 def list_recipes():
     """Return a small list of example recipes as JSON."""
 
-    example_recipe = [1001, 1002, 1003, 1004]
+    example_recipe_1 = [1008, 1022, 1043, 1034]
+    example_recipe_2 = [1001, 1002, 1003, 1004]
 
-    json = list(map(get_by_id, example_recipe))
+    recipe_1= list(map(get_by_id, example_recipe_1))
+    recipe_2= list(map(get_by_id, example_recipe_2))
 
-    return jsonify(json)
+    return jsonify([recipe_1, recipe_2])
