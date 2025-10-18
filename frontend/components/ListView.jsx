@@ -3,68 +3,71 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { Header, Button } from "@rneui/base";
 import ListItem from "./ListItem";
 import Footer from "./Footer";
+import CustomHeader from "./CustomHeader";
+import SearchPopup from "./SearchPopup";
 
-export default function ListView() {
+export default function ListView(props) {
 
-const [listItems, setListItems] = React.useState([
-    { id: 1, itemName: "Kjøttdeig 400g", brand: "Nortura", price: 73.9, count: 1 },
-    { id: 2, itemName: "Kjøttdeig 400g, 14%", brand: "Rema 1000", price: 64.9, count: 1 },
-    { id: 3, itemName: "Kjøttdeig 400g, 14%", brand: "Rema 1000", price: 64.7, count: 1 },
-]);
+    const [searchVisible, setSearchVisible] = React.useState(false); 
 
-const handleChangeCount = (id, newCount) => {
-    setListItems((prev) =>
-    prev
-        .map((item) => (item.id === id ? { ...item, count: newCount } : item))
-        .filter((item) => item.count > 0)
-    );
-};
+    const test = true
 
-const handleToggleChecked = (id) => {
-    setListItems((prev) =>
-    prev.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item))
-    );
-};
+    const handleChangeCount = (id, newCount) => {
+        props.setListItems((prev) =>
+            prev
+                .map((item) => (item.productId === id ? { ...item, count: newCount } : item))
+                .filter((item) => item.count > 0)
+        );
+    };
 
-return (
-    <View style={styles.container}>
-        <Header
-            backgroundColor="#171718"
-            containerStyle={{ height: 80 }}
-            rightComponent={
-            <Button
-                containerStyle={{ width: 130 }}
-                buttonStyle={styles.payCTA}
-                title="Betal"
-                titleStyle={{ color: "#fff", fontFamily: "REMA-bold" }}
+    const handleToggleChecked = (id) => {
+        props.setListItems((prev) =>
+            prev.map((item) => (item.productId === id ? { ...item, checked: !item.checked } : item))
+        );
+    };
+
+    return (
+        <View style={styles.container}>
+            <CustomHeader
+                title="Handleliste"
+                buttonTitle="Betal"
+                onButtonPress={() => console.log("Button pressed!")}
+                showBackButton={true}
+                onBackPress={props.onBackPress}
             />
-            }
-        />
 
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-            {listItems.map((item) => (
-            <ListItem
-                key={item.id}
-                itemName={item.itemName}
-                brand={item.brand}
-                price={item.price}
-                count={item.count}
-                checked={item.checked || false}
-                onChangeCount={(newCount) => handleChangeCount(item.id, newCount)}
-                onToggleChecked={() => handleToggleChecked(item.id)}
-            />
-            ))}
-        </ScrollView>
+            {test && <SearchPopup 
+                visible={searchVisible}
+                onClose={() => setSearchVisible(false)}
+                onSearch={(text) => console.log("Searching for:", text)}
+            />}
 
-        <Footer sum={240} carbon={240.1} style={styles.footer} />
-    </View>
-);
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+                {props.data.map((item) => (
+                    <ListItem
+                        key={item.productId}
+                        name={item.name}
+                        brand={
+                            "" + Math.round(100 * (item.price / item.pricePerUnit)) / 100 + "" + item.unit
+                        }
+                        price={item.price}
+                        count={item.count || 1}
+                        checked={item.checked || false}
+                        onChangeCount={(newCount) => handleChangeCount(item.productId, newCount)}
+                        onToggleChecked={() => handleToggleChecked(item.productId)}
+                    />
+                ))}
+            </ScrollView>
+
+            <Footer sum={240} carbon={240.1} style={styles.footer} onSearch={() => setSearchVisible(!searchVisible)} />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1, // fills the available space in App
-        backgroundColor: "#fff",
+        backgroundColor: "#171718",
     },
     scrollContainer: {
         paddingBottom: 20,
