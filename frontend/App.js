@@ -5,7 +5,7 @@ import ListItem from './components/ListItem'
 import RecipeDisplay from './components/RecipeDisplay'
 import { useFonts } from "expo-font";
 import ListView from "./components/ListView";
-import { SafeAreaView } from "react-native-safe-area-context"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 import config from "./config";
 
 export default function App() {
@@ -51,13 +51,15 @@ export default function App() {
     if (!fontsLoaded) return null; // wait for fonts to load
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
-                <StatusBar style="auto" />
-                {data && <ListView data={data} />}
-                <RecipeDisplay backendUrl={API_URL} />
-            </View>
-        </SafeAreaView>
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.container}>
+                    <StatusBar style="auto" />
+                    {data && <ListView data={data} />}
+                    <RecipeDisplay backendUrl={API_URL} />
+                </View>
+            </SafeAreaView>
+        </SafeAreaProvider>
     )
 }
 
