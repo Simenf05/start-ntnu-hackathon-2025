@@ -18,45 +18,37 @@ export default function App() {
 
     const API_URL = config.SERVER_ADDRESS;
 
+    const [currentView, setCurrentView] = useState('recipes'); // 'recipes' or 'list'
+    const [listItems, setListItems] = useState([]);
 
-    const [data, setData] = useState()
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+    const handleSelectRecipe = (ingredients, recipeName) => {
+        // Convert recipe ingredients to list items format
+        const convertedItems = ingredients.map((item, index) => {
+            // Extract product details with fallbacks
+            const name = item.name || item.Title || item.title || item.productName || item.DisplayName || item.Name || `Item ${index + 1}`;
+            const price = item.price || item.Price || 0;
+            const unit = item.unit || item.Unit || 'stk';
+            const pricePerUnit = item.pricePerUnit || item.price_per_unit || price;
+            const productId = item.productId || item.product_id || item.id || `${recipeName}-${index}`;
+            
+            return {
+                productId,
+                name,
+                brand: "" + Math.round(100 * (price / pricePerUnit)) / 100 + "" + unit,
+                price,
+                unit,
+                pricePerUnit,
+                count: 1,
+                checked: false
+            };
+        });
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const resp = await fetch(`${API_URL}/api/search/name?name=melk`)
-                const json = await resp.json()
-                setData(json)
-            } catch (err) {
-                console.error("Failed to fetch data:", err)
-                setError(err.message)
-                // Set some default data so the app still works
-                setData({ products: [] })
-            } finally {
-                setLoading(false)
-            }
-        })()
-    }, [])
-
-    const [listItems, setListItems] = useState([
-        { id: 0, name: "Kjøttdeig 400g", brand: "Nortura", price: 73.9, count: 1 },
-        { id: 1, name: "Kjøttdeig 400g, 14%", brand: "Rema 1000", price: 64.9, count: 1 }
-    ]);
-
-    const handleChangeCount = (id, newCount) => {
-        setListItems(prev =>
-            prev
-                .map(item => item.id === id ? { ...item, count: newCount } : item)
-                .filter(item => item.count > 0)
-        );
+        setListItems(convertedItems);
+        setCurrentView('list');
     };
 
-    const handleToggleChecked = (id) => {
-        setListItems(prev =>
-            prev.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
-        );
+    const handleBackToRecipes = () => {
+        setCurrentView('recipes');
     };
 
     if (!fontsLoaded) return null; // wait for fonts to load
@@ -66,23 +58,19 @@ export default function App() {
             <SafeAreaView style={[styles.container, {paddingTop: 0}]} >
                 <View style={styles.container}>
                     <StatusBar style="light" />
-                    {loading ? (
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ color: '#fff', fontSize: 18 }}>Loading...</Text>
-                        </View>
-                    ) : error ? (
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
-                            <Text style={{ color: '#ff6b6b', fontSize: 16, textAlign: 'center' }}>
-                                Failed to connect to server
-                            </Text>
-                            <Text style={{ color: '#888', fontSize: 12, marginTop: 10, textAlign: 'center' }}>
-                                {error}
-                            </Text>
-                        </View>
+                    {currentView === 'recipes' ? (
+                        <RecipeDisplay 
+                            backendUrl={API_URL} 
+                            onSelectRecipe={handleSelectRecipe}
+                        />
                     ) : (
-                        data && <ListView data={data} setListItems={setListItems} listItems={listItems} />
+                        <ListView 
+                            data={listItems} 
+                            setListItems={setListItems} 
+                            listItems={listItems}
+                            onBackPress={handleBackToRecipes}
+                        />
                     )}
-                    {/* <RecipeDisplay backendUrl={API_URL} /> */}
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>
