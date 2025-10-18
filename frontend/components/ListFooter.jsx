@@ -10,8 +10,8 @@ export default function ListFooter(props) {
             <ListButtons></ListButtons>
             <View style={styles.bottom}>
 
-                <Text style={styles.text}>Sum: {props.sum}</Text>
-                <Text style={styles.text}>CO₂: {props.carbon}</Text>
+                <Text style={styles.text}>Sum: {props.sum} kr</Text>
+                <Text style={styles.text}>CO₂: {props.carbon} kg</Text>
             </View>
         </View>
     )

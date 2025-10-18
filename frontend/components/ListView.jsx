@@ -26,6 +26,24 @@ export default function ListView(props) {
         );
     };
 
+    // Calculate total price and carbon footprint based on count - only for checked items
+    const totalPrice = props.data.reduce((sum, item) => {
+        if (item.checked) {
+            return sum + (item.price * item.count);
+        }
+        return sum;
+    }, 0);
+
+    const totalCarbonGrams = props.data.reduce((sum, item) => {
+        if (item.checked) {
+            return sum + ((item.carbonFootprintGram || 0) * item.count);
+        }
+        return sum;
+    }, 0);
+
+    // Convert grams to kg for display
+    const totalCarbonKg = totalCarbonGrams / 1000;
+
     return (
         <View style={styles.container}>
             <CustomHeader
@@ -59,7 +77,8 @@ export default function ListView(props) {
                 ))}
             </ScrollView>
 
-            <ListFooter sum={240} carbon={240.1} style={styles.footer} onSearch={() => setSearchVisible(!searchVisible)} />
+
+            <ListFooter sum={totalPrice.toFixed(2)} carbon={totalCarbonKg.toFixed(2)} style={styles.footer} onSearch={() => setSearchVisible(!searchVisible)} />
         </View>
     );
 }

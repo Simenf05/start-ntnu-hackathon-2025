@@ -74,8 +74,10 @@ cd frontend
 
 2. Install dependencies:
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
+
+> **Note**: The `--legacy-peer-deps` flag is required due to peer dependency conflicts between Expo's required version of `react-native-safe-area-context` (v5.6.0) and the @rneui UI library components.
 
 3. Update the `config.js` file with your backend server address:
 ```javascript
@@ -159,8 +161,34 @@ Search for products matching the given description (case-insensitive).
 ### Frontend
 - React Native - Mobile framework
 - Expo - Development platform
-- React Native Elements - UI components
+- React Native Elements (@rneui) - UI components
+- React Native Safe Area Context - Safe area handling for iOS/Android
 - Expo Vector Icons - Icon library
+
+## 🔧 Troubleshooting
+
+### NPM Installation Issues
+
+If you encounter peer dependency errors during `npm install`, use the `--legacy-peer-deps` flag:
+
+```bash
+npm install --legacy-peer-deps
+```
+
+This is necessary because:
+- Expo ~54.0.13 requires `react-native-safe-area-context@~5.6.0`
+- Some UI libraries may have peer dependencies expecting older versions
+- The `--legacy-peer-deps` flag ensures compatibility across all packages
+
+### Backend Connection Issues
+
+Make sure to update `frontend/config.js` with your machine's IP address (not `localhost`) when running on a physical device:
+
+```javascript
+export default {
+  SERVER_ADDRESS: "http://192.168.x.x:5000"  // Replace with your IP
+};
+```
 
 ## 🌱 Sustainability Features
 
