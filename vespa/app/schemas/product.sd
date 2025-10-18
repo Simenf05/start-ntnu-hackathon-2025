@@ -1,0 +1,70 @@
+# Copyright Vespa.ai. Licensed under the terms of the Apache 2.0 license. See LICENSE in the project root.
+
+schema product {
+
+    document product {
+
+        field productId type int {
+            indexing: summary | attribute
+        }
+
+        field name type string {
+            indexing: summary | index
+            index: enable-bm25
+        }
+        
+        field description type string {
+            indexing: summary | index
+            index: enable-bm25
+        }
+
+        field carbonFootprintGram type int {
+            indexing: summary | attribute
+        }
+        
+        field price type float {
+            indexing: summary | attribute
+        }
+        
+        field pricePerUnit type float {
+            indexing: summary | attribute
+        }
+
+        field allergens type array<string> {
+            indexing: summary | attribute 
+        }
+
+        field organic type bool {
+            indexing: summary | attribute
+        }
+    }
+
+    fieldset default {
+        fields: name,description 
+    }
+
+    # Originally 384 dimensions float
+    # See https://docs.vespa.ai/en/binarizing-vectors.html
+    field embedding type tensor<float>(x[768]) {
+        indexing: input name . ' ' . input description | embed | attribute | summary
+        attribute {
+            distance-metric: angular
+        }
+    }
+    
+    rank-profile product_search inherits default {
+        inputs {
+            query(q_emb) tensor<float>(x[768])
+        }
+
+        first-phase {
+            expression: closeness(field, embedding) + nativeRank(description) + nativeRank(name)
+        }
+        summary-features {
+            nativeRank(name)
+            nativeRank(description)
+            closeness(field, embedding)
+        }
+    }
+
+}
