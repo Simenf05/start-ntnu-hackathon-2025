@@ -7,3 +7,5 @@
 !orders_train.jsonl
 !products.jsonl
 !users.jsonl
+!categories.csv
+!rema_dataset_big.jsonl

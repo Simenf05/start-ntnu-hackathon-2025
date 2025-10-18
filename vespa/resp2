@@ -1,0 +1,248 @@
+{
+    "root": {
+        "id": "toplevel",
+        "relevance": 1.0,
+        "fields": {
+            "totalCount": 42
+        },
+        "coverage": {
+            "coverage": 100,
+            "documents": 145,
+            "full": true,
+            "nodes": 1,
+            "results": 1,
+            "resultsFull": 1
+        },
+        "children": [
+            {
+                "id": "id:products:product::18",
+                "relevance": 1.0761732873642427,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::18",
+                    "productId": 1018,
+                    "name": "Cottage cheese",
+                    "description": "ost",
+                    "carbonFootprintGram": 1640,
+                    "price": 27.15,
+                    "pricePerUnit": 64.64,
+                    "allergens": [
+                        "melk",
+                        "laktose"
+                    ],
+                    "organic": false,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6943109037647301,
+                        "nativeRank(description)": 0.38186238359951247,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::20",
+                "relevance": 1.0761732873642427,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::20",
+                    "productId": 1020,
+                    "name": "Jarlsberg blokk",
+                    "description": "ost",
+                    "carbonFootprintGram": 1321,
+                    "price": 51.23,
+                    "pricePerUnit": 102.46,
+                    "allergens": [
+                        "melk",
+                        "laktose"
+                    ],
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6943109037647301,
+                        "nativeRank(description)": 0.38186238359951247,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::19",
+                "relevance": 1.0761732873642427,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::19",
+                    "productId": 1019,
+                    "name": "Norvegia skivet",
+                    "description": "ost",
+                    "carbonFootprintGram": 614,
+                    "price": 52.93,
+                    "pricePerUnit": 176.43,
+                    "allergens": [
+                        "melk",
+                        "laktose"
+                    ],
+                    "organic": false,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6943109037647301,
+                        "nativeRank(description)": 0.38186238359951247,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::119",
+                "relevance": 0.6210565032704738,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::119",
+                    "productId": 1119,
+                    "name": "Nøttemiks",
+                    "description": "Ristet. Organisk",
+                    "carbonFootprintGram": 834,
+                    "price": 39.87,
+                    "pricePerUnit": 199.35,
+                    "allergens": [
+                        "nøtter",
+                        "peanøtter"
+                    ],
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6210565032704738,
+                        "nativeRank(description)": 0.0,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::86",
+                "relevance": 0.6152731177634851,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::86",
+                    "productId": 1086,
+                    "name": "Peanøttsmør",
+                    "description": "Kremet. Organisk",
+                    "carbonFootprintGram": 483,
+                    "price": 38.3,
+                    "pricePerUnit": 109.43,
+                    "allergens": [
+                        "peanøtter"
+                    ],
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6152731177634851,
+                        "nativeRank(description)": 0.0,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::132",
+                "relevance": 0.6148597847769224,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::132",
+                    "productId": 1132,
+                    "name": "Basilikum",
+                    "description": "Tørket. Organisk",
+                    "carbonFootprintGram": 69,
+                    "price": 18.24,
+                    "pricePerUnit": 1520.0,
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6148597847769224,
+                        "nativeRank(description)": 0.0,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::25",
+                "relevance": 0.6114487286235447,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::25",
+                    "productId": 1025,
+                    "name": "Bacon skivet",
+                    "description": "Sprøstekt potensiale. Organisk",
+                    "carbonFootprintGram": 10848,
+                    "price": 159.69,
+                    "pricePerUnit": 1064.6,
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6114487286235447,
+                        "nativeRank(description)": 0.0,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::134",
+                "relevance": 0.6108011853316341,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::134",
+                    "productId": 1134,
+                    "name": "Chiliflakes",
+                    "description": "Sterk. Organisk",
+                    "carbonFootprintGram": 89,
+                    "price": 16.94,
+                    "pricePerUnit": 564.67,
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6108011853316341,
+                        "nativeRank(description)": 0.0,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::101",
+                "relevance": 0.6088058386342522,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::101",
+                    "productId": 1101,
+                    "name": "Vann uten kullsyre",
+                    "description": "Naturell. Organisk",
+                    "carbonFootprintGram": 196,
+                    "price": 37.84,
+                    "pricePerUnit": 25.23,
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6088058386342522,
+                        "nativeRank(description)": 0.0,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            },
+            {
+                "id": "id:products:product::60",
+                "relevance": 0.6084055930483431,
+                "source": "product",
+                "fields": {
+                    "sddocname": "product",
+                    "documentid": "id:products:product::60",
+                    "productId": 1060,
+                    "name": "Avokado",
+                    "description": "2 stk modne. Organisk",
+                    "carbonFootprintGram": 285,
+                    "price": 15.91,
+                    "pricePerUnit": 53.03,
+                    "organic": true,
+                    "summaryfeatures": {
+                        "closeness(field,embedding)": 0.6084055930483431,
+                        "nativeRank(description)": 0.0,
+                        "vespa.summaryFeatures.cached": 0.0
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -46,7 +46,7 @@ schema product {
     # Originally 384 dimensions float
     # See https://docs.vespa.ai/en/binarizing-vectors.html
     field embedding type tensor<float>(x[768]) {
-        indexing: input name . ' ' . input description | embed | attribute | summary
+        indexing: input description | embed | attribute
         attribute {
             distance-metric: angular
         }
@@ -58,10 +58,9 @@ schema product {
         }
 
         first-phase {
-            expression: closeness(field, embedding) + nativeRank(description) + nativeRank(name)
+            expression: closeness(field, embedding) + nativeRank(description)
         }
         summary-features {
-            nativeRank(name)
             nativeRank(description)
             closeness(field, embedding)
         }
