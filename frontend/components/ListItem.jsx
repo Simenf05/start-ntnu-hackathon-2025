@@ -21,7 +21,7 @@ export default function ListItem(props) {
     const [changeVisisble, setChangeVisisble] = useState(false);
 
     const checked = props.checked;
-    const onToggleChecked = () => props.onToggleChecked();
+    const onToggleChecked  = () => props.onToggleChecked();
 
     const ingredient = props.ingredient;
 
@@ -33,8 +33,8 @@ export default function ListItem(props) {
         <Pressable style={styles.tile} onPress={() => setChangeVisisble(true)}>
                 <View style={[styles.checkbox, styles.general]}>
                     <CheckBox
-                        onPress={() => toggleChecked()}
-                        checked={checked}
+                        onPress={props.onToggleChecked}
+                        checked={props.checked}
                         size={36}
                         checkedIcon="check-square"
                         uncheckedIcon="square"
@@ -52,9 +52,9 @@ export default function ListItem(props) {
                         { opacity: checked ? 0.5 : 1 },
                     ]}
                 >
-                    <Text style={{ fontWeight: "bold" }}>{props.itemName}</Text>
-                    <Text style={{ color: textGray }}>{props.brand}</Text>
-                    <Text style={{ color: textGray }}>{props.price}kr</Text>
+                    <Text style={{ fontWeight: "bold" , fontFamily: "REMA-regular"}}>{props.itemName}</Text>
+                    <Text style={{ color: textGray , fontFamily: "REMA-regular"}}>{props.brand}</Text>
+                    <Text style={{ color: textGray , fontFamily: "REMA-regular"}}>{props.price}kr</Text>
                 </View>
                 <View
                     style={[
@@ -123,5 +123,6 @@ const styles = StyleSheet.create({
     amountText: {
         fontSize: 20,
         textAlign: "center",
+        fontFamily: "REMA-regular",
     },
 });

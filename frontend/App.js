@@ -3,7 +3,17 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import ListItem from './components/ListItem'
 
+import { StyleSheet } from "react-native";
+import { useFonts } from "expo-font";
+import ListView from "./components/ListView";
+import { SafeAreaView } from "react-native-safe-area-context"
+
 export default function App() {
+    // Load fonts globally
+    const [fontsLoaded] = useFonts({
+        "REMA-regular": require("./assets/REMA-Regular.ttf"),
+        "REMA-bold": require("./assets/REMA-Bold.ttf"),
+    });
 
     const API_URL = 'http://10.10.30.113:5000/'
 
@@ -34,47 +44,25 @@ export default function App() {
         setListItems(prev =>
             prev.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
         );
-        };
+    };
+
+    if (!fontsLoaded) return null; // wait for fonts to load
 
     return (
-        <View style={styles.container}>
-            <StatusBar style="auto" />
-            
-            {data && data.map((ingredient, index) => (
-                <ListItem
-                    key={index}
-                    itemName={ingredient.name}
-                    brand={ingredient.brand}
-                    price={ingredient.price}
-                    count={1}
-                    onChangeCount={(newCount) => handleChangeCount(index, newCount)}
-                    checked={ingredient.checked || false}
-                    onToggleChecked={() => handleToggleChecked(index)}
-                    ingredient={ingredient}
-                />
-            ))}
+        <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
+                <StatusBar style="auto" />
 
-            {/*listItems.map(item => (
-                <ListItem
-                    key={item.id}
-                    itemName={item.itemName}
-                    brand={item.brand}
-                    price={item.price}
-                    count={item.count}
-                    onChangeCount={(newCount) => handleChangeCount(item.id, newCount)}
-                    ingredient={data[item.id]}
-                />
-            ))*/}
+                {data && <ListView data={data} />}
 
-        </View>
-    );
+            </View>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: "#fff",
     },
 });
