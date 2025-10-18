@@ -4,8 +4,13 @@ import { Header, Button } from "@rneui/base";
 import ListItem from "./ListItem";
 import Footer from "./Footer";
 import CustomHeader from "./CustomHeader";
+import SearchPopup from "./SearchPopup";
 
 export default function ListView(props) {
+
+    const [searchVisible, setSearchVisible] = React.useState(false); 
+
+    const test = true
 
     const handleChangeCount = (id, newCount) => {
         props.setListItems((prev) =>
@@ -29,6 +34,11 @@ export default function ListView(props) {
                 onButtonPress={() => console.log("Button pressed!")}
             />
 
+            {test && <SearchPopup 
+                visible={searchVisible}
+                onClose={() => setSearchVisible(false)}
+                onSearch={(text) => console.log("Searching for:", text)}
+            />}
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 {props.data.map((item) => (
@@ -47,7 +57,7 @@ export default function ListView(props) {
                 ))}
             </ScrollView>
 
-            <Footer sum={240} carbon={240.1} style={styles.footer} />
+            <Footer sum={240} carbon={240.1} style={styles.footer} onSearch={() => setSearchVisible(!searchVisible)} />
         </View>
     );
 }
