@@ -1,29 +1,28 @@
 import React from "react"
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from "@rneui/base"
 import ListButtons from "./ListButtons"
 
-export default function Footer(props) {
+export default function RecipeFooter(props) {
     return (
 
-        <View>
-            {/* <View style={styles.buttonWrapper}>
-                <Button
-                    title="Text"
-                    buttonStyle={{padding: 20, width: "70%"}}
-                ></Button>
-                <Button
-                    title="Text"
-                    buttonStyle={{padding: 20, width: "70%"}}
-                ></Button>
-            </View> */}
-            <ListButtons></ListButtons>
-            <View style={styles.bottom}>
+        <View style={{ paddingHorizontal: 16 }}>
+    <TouchableOpacity
+        onPress={() => props.onAdminPreferences()}
+        style={{
+            backgroundColor: "#034C8C",
+            borderRadius: 8,
+            paddingVertical: 12,
+            alignItems: "center",
+            marginVertical: 12,
+        }}
+    >
+        <Text style={{ color: "#fff", fontFamily: "REMA-regular", fontSize: 16 }}>
+            Administrer matpreferanser
+        </Text>
+    </TouchableOpacity>
+</View>
 
-                <Text style={styles.text}>Sum: {props.sum}</Text>
-                <Text style={styles.text}>CO₂: {props.carbon}</Text>
-            </View>
-        </View>
     )
 }
 

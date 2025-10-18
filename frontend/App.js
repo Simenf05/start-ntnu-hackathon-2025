@@ -7,6 +7,8 @@ import { useFonts } from "expo-font";
 import ListView from "./components/ListView";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 import config from "./config";
+import FoodPreferences from './components/FoodPreferences';
+
 
 export default function App() {
 
@@ -51,6 +53,11 @@ export default function App() {
         setCurrentView('recipes');
     };
 
+    const handleGoToPreferences = () => {
+        setCurrentView('preferences');
+    };
+
+
     if (!fontsLoaded) return null; // wait for fonts to load
 
     return (
@@ -62,15 +69,18 @@ export default function App() {
                         <RecipeDisplay 
                             backendUrl={API_URL} 
                             onSelectRecipe={handleSelectRecipe}
+                            onAdminPreferences={handleGoToPreferences}
                         />
-                    ) : (
+                    ) : currentView === 'list' ? (
                         <ListView 
                             data={listItems} 
                             setListItems={setListItems} 
                             listItems={listItems}
                             onBackPress={handleBackToRecipes}
                         />
-                    )}
+                    ) : currentView === 'preferences' ? (
+                        <FoodPreferences onBack={handleBackToRecipes} />
+                    ) : null}
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>
