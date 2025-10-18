@@ -2,6 +2,8 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 export default function ChangeIngredient({ visible, setVisible, ingredient }) {
 
+    if (!ingredient) return null;
+
     return (
         <View style={styles.container}>
 
