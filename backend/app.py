@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 from recipes import recipes_bp
 from barcode import barcode_bp 
@@ -6,6 +7,7 @@ from search import search_bp
 
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Register blueprints
 app.register_blueprint(recipes_bp, url_prefix='/api')
@@ -20,6 +22,24 @@ app.register_blueprint(search_bp, url_prefix='/api')
 @app.route('/api/test', methods=['GET'])
 def test_route():
     return jsonify({"message": "API is working!"})
+
+# Simple test endpoint for recipes
+@app.route('/api/recipes-simple', methods=['GET'])
+def simple_recipes():
+    return jsonify([
+        {
+            "name": "Test Recipe 1",
+            "ingredients": [{"name": "Item 1", "price": 10.5}],
+            "total_price": 10.5,
+            "total_carbon_footprint_gram": 100
+        },
+        {
+            "name": "Test Recipe 2",
+            "ingredients": [{"name": "Item 2", "price": 20.0}],
+            "total_price": 20.0,
+            "total_carbon_footprint_gram": 200
+        }
+    ])
 
 # Error handling
 @app.errorhandler(404)

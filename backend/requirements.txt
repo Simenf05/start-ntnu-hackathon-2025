@@ -12,6 +12,7 @@ cryptography==46.0.3
 docker==7.1.0
 fastcore==1.8.13
 Flask==3.1.2
+flask-cors==6.0.1
 frozenlist==1.8.0
 h11==0.16.0
 h2==4.3.0
