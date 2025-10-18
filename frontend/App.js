@@ -23,15 +23,15 @@ export default function App() {
 
     useEffect(() => {
         (async () => {
-            const resp = await fetch(`${API_URL}/api/search/name?name=kjøtt`)
+            const resp = await fetch(`${API_URL}/api/search/name?name=melk`)
             const json = await resp.json()
             setData(json)
         })()
     }, [])
 
     const [listItems, setListItems] = useState([
-        { id: 0, itemName: "Kjøttdeig 400g", brand: "Nortura", price: 73.9, count: 1 },
-        { id: 1, itemName: "Kjøttdeig 400g, 14%", brand: "Rema 1000", price: 64.9, count: 1 }
+        { id: 0, name: "Kjøttdeig 400g", brand: "Nortura", price: 73.9, count: 1 },
+        { id: 1, name: "Kjøttdeig 400g, 14%", brand: "Rema 1000", price: 64.9, count: 1 }
     ]);
 
     const handleChangeCount = (id, newCount) => {
@@ -52,11 +52,11 @@ export default function App() {
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={[styles.container, {paddingTop: 0}]} >
                 <View style={styles.container}>
-                    <StatusBar style="auto" />
+                    <StatusBar style="light" />
                     {data && <ListView data={data} />}
-                    <RecipeDisplay backendUrl={API_URL} />
+                    {/* <RecipeDisplay backendUrl={API_URL} /> */}
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>
@@ -66,6 +66,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#171718",
     },
 });

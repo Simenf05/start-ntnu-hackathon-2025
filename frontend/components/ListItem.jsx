@@ -10,9 +10,9 @@ import { Button, CheckBox } from "@rneui/base";
 import { FontAwesome } from "@expo/vector-icons";
 import ChangeIngredient from "./ChangeIngredient";
 
-const gray = "rgba(187, 187, 187, 1)";
-const textGray = "rgba(99, 99, 99, 1)";
-const lightGray = "rgba(230, 230, 230, 1)";
+const gray = "#666";
+const textGray = "#bdbdbd";
+const darkGray = "#808080";
 
 export default function ListItem(props) {
     // const [checked, setChecked] = React.useState(false)
@@ -29,10 +29,11 @@ export default function ListItem(props) {
     // const decrementCount = () => setCount(count - 1)
 
     return (
-        <View style={{ backgroundColor: checked ? "#eee" : "#fff" }}>
+        <View style={{ backgroundColor: checked ? "#444" : "#2b2b2b" }}>
         <Pressable style={styles.tile} onPress={() => setChangeVisisble(true)}>
                 <View style={[styles.checkbox, styles.general]}>
                     <CheckBox
+                        
                         onPress={props.onToggleChecked}
                         checked={props.checked}
                         size={36}
@@ -52,7 +53,7 @@ export default function ListItem(props) {
                         { opacity: checked ? 0.5 : 1 },
                     ]}
                 >
-                    <Text style={{ fontWeight: "bold" , fontFamily: "REMA-regular"}}>{props.itemName}</Text>
+                    <Text style={{ fontWeight: "bold" , fontFamily: "REMA-regular", color: "#fff"}}>{props.name}</Text>
                     <Text style={{ color: textGray , fontFamily: "REMA-regular"}}>{props.brand}</Text>
                     <Text style={{ color: textGray , fontFamily: "REMA-regular"}}>{props.price}kr</Text>
                 </View>
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     itemInfo: {
-        width: "60%",
+        width: "62%",
     },
     amount: {
         width: "15%",
@@ -113,16 +114,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     amountButtons: {
-        backgroundColor: lightGray,
-        width: 40,
+        backgroundColor: darkGray,
+        width: 32,
         justifyContent: "center",
         alignItems: "center",
-        height: 40,
+        height: 32,
         borderRadius: 600,
     },
     amountText: {
         fontSize: 20,
         textAlign: "center",
         fontFamily: "REMA-regular",
+        color: "#fff"
     },
 });
