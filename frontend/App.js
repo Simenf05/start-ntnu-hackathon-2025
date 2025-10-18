@@ -6,7 +6,7 @@ import RecipeDisplay from './components/RecipeDisplay'
 import { useFonts } from "expo-font";
 import ListView from "./components/ListView";
 import { SafeAreaView } from "react-native-safe-area-context"
-
+import config from "./config";
 
 export default function App() {
 
@@ -16,7 +16,8 @@ export default function App() {
         "REMA-bold": require("./assets/REMA-Bold.ttf"),
     });
 
-    const API_URL = 'http://10.10.30.113:5000/'
+    const API_URL = config.SERVER_ADDRESS;
+
 
     const [data, setData] = useState()
 

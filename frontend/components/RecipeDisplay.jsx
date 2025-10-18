@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
     small: { marginTop: 8, color: '#666' },
     error: { color: 'red' },
     recipeBox: { marginBottom: 16, padding: 12, borderRadius: 8, backgroundColor: '#f7f7f7' },
-    recipeTitle: { fontSize: 18, fontWeight: '600', marginBottom: 8 },
-    itemText: { fontSize: 14, marginBottom: 4 }
+    recipeTitle: { fontSize: 18, fontWeight: '600', marginBottom: 8, fontFamily: "REMA-bold" },
+    itemText: { fontSize: 14, marginBottom: 4, fontFamily: "REMA-regular" }
 });
