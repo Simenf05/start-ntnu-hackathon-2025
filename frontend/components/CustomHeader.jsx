@@ -6,20 +6,30 @@ export default function CustomHeader({
     buttonTitle = "Betal",
     onButtonPress,
     onBackPress,
+    showBackButton = false,
+    showActionButton = true,
 }) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={onBackPress}>
-                <Text style={styles.backText}>Tilbake</Text>
-            </TouchableOpacity>
+            {showBackButton ? (
+                <TouchableOpacity onPress={onBackPress}>
+                    <Text style={styles.backText}>Tilbake</Text>
+                </TouchableOpacity>
+            ) : (
+                <View style={styles.backPlaceholder} />
+            )}
 
             <View style={styles.center}>
                 <Text style={styles.title}>{title}</Text>
             </View>
 
-            <TouchableOpacity onPress={onButtonPress} style={styles.cta}>
-                <Text style={styles.ctaText}>{buttonTitle}</Text>
-            </TouchableOpacity>
+            {showActionButton ? (
+                <TouchableOpacity onPress={onButtonPress} style={styles.cta}>
+                    <Text style={styles.ctaText}>{buttonTitle}</Text>
+                </TouchableOpacity>
+            ) : (
+                <View style={styles.ctaPlaceholder} />
+            )}
         </View>
     );
 }
@@ -47,6 +57,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingRight: 32
     },
+    backPlaceholder: {
+        width: 80, // Same width as back button area for centering
+    },
     cta: {
         backgroundColor: "#034C8C",
         borderRadius: 5,
@@ -54,6 +67,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         justifyContent: "center",
         alignItems: "center",
+    },
+    ctaPlaceholder: {
+        width: 80, // Same width as CTA button area for centering
     },
     ctaText: {
         color: "#fff",

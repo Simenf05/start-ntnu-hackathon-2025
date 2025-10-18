@@ -32,6 +32,8 @@ export default function ListView(props) {
                 title="Handleliste"
                 buttonTitle="Betal"
                 onButtonPress={() => console.log("Button pressed!")}
+                showBackButton={true}
+                onBackPress={props.onBackPress}
             />
 
             {test && <SearchPopup 
