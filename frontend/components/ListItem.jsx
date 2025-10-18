@@ -12,7 +12,7 @@ export default function ListItem(props) {
     // const toggleChecked = () => setChecked(!checked)
 
     const checked= props.checked
-    const onToggleChecked= () => props.onToggleChecked()
+    const onToggleChecked = () => props.onToggleChecked()
 
     // const incrementCount = () => setCount(count + 1)
     // const decrementCount = () => setCount(count - 1)
@@ -21,8 +21,8 @@ export default function ListItem(props) {
         <View style={[styles.tile, {backgroundColor: checked ? "#eee" : "#fff"}]}>
             <View style={[styles.checkbox, styles.general, ]}>
                 <CheckBox
-                    onPress={() => toggleChecked()}
-                    checked={checked}
+                    onPress={props.onToggleChecked}
+                    checked={props.checked}
                     size={36}
                     checkedIcon="check-square"
                     uncheckedIcon="square"
@@ -30,9 +30,9 @@ export default function ListItem(props) {
                 ></CheckBox>
             </View>
             <View style={[styles.itemInfo, styles.general, {opacity: checked ? 0.5 : 1}]}>
-                <Text style={{fontWeight: "bold"}}>{props.itemName}</Text>
-                <Text style={{color: textGray}}>{props.brand}</Text>
-                <Text style={{color: textGray}}>{props.price}kr</Text>
+                <Text style={{fontWeight: "bold", fontFamily: "REMA-regular"}}>{props.itemName}</Text>
+                <Text style={{color: textGray, fontFamily: "REMA-regular"}}>{props.brand}</Text>
+                <Text style={{color: textGray, fontFamily: "REMA-regular"}}>{props.price}kr</Text>
             </View>
             <View style={[styles.amount, styles.general, {opacity: checked ? 0.5 : 1}]}>
                 <Pressable onPress={() => props.onChangeCount(props.count - 1)} style={styles.amountButtons}>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     },
     amountText: {
         fontSize: 20,
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily: "REMA-regular"
     }
 });

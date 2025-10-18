@@ -1,53 +1,28 @@
-import React from "react"
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import ListItem from './components/ListItem'
+import React from "react";
+import { StyleSheet } from "react-native";
+import { useFonts } from "expo-font";
+import ListView from "./components/ListView";
+import { SafeAreaView } from "react-native-safe-area-context"
 
 export default function App() {
+// Load fonts globally
+const [fontsLoaded] = useFonts({
+    "REMA-regular": require("./assets/REMA-Regular.ttf"),
+    "REMA-bold": require("./assets/REMA-Bold.ttf"),
+});
 
-    const [listItems, setListItems] = React.useState([
-        { id: 1, itemName: "Kjøttdeig 400g", brand: "Nortura", price: 73.9, count: 1 },
-        { id: 2, itemName: "Kjøttdeig 400g, 14%", brand: "Rema 1000", price: 64.9, count: 1 }
-    ]);
+if (!fontsLoaded) return null; // wait for fonts to load
 
-    const handleChangeCount = (id, newCount) => {
-        setListItems(prev =>
-            prev
-                .map(item => item.id === id ? { ...item, count: newCount } : item)
-                .filter(item => item.count > 0)
-        );
-    };
-
-    const handleToggleChecked = (id) => {
-        setListItems(prev =>
-            prev.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
-        );
-        };
-
-    return (
-        <View style={styles.container}>
-            <Text></Text>
-            <StatusBar style="auto" />
-            {listItems.map(item => (
-                <ListItem
-                    key={item.id}
-                    itemName={item.itemName}
-                    brand={item.brand}
-                    price={item.price}
-                    count={item.count}
-                    onChangeCount={(newCount) => handleChangeCount(item.id, newCount)}
-                />
-            ))}
-
-        </View>
+return (
+        <SafeAreaView style={styles.container}>
+            <ListView />
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: "#fff",
     },
 });
