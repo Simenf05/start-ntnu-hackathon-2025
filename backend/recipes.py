@@ -5,6 +5,19 @@ recipes_bp = Blueprint('recipes', __name__)
 
 id_to_url = lambda id: f"https://startcode-hackathon2025.azurewebsites.net/api/GetProductById?productId={id}"
 
+def make_recipe(name, ingredient_ids):
+    ingredients = list(map(get_by_id, ingredient_ids))
+    total_price = sum(ingredient['price'] for ingredient in ingredients)
+    total_carbon_footprint_gram = sum(ingredient['carbonFootprintGram'] for ingredient in ingredients)
+
+    return {
+        "name": name,
+        "ingredients": ingredients,
+        "total_price": total_price,
+        "total_carbon_footprint_gram": total_carbon_footprint_gram
+    }
+
+
 def get_by_id(id):
     url = id_to_url(id)
     resp = requests.get(url)
@@ -15,10 +28,20 @@ def get_by_id(id):
 def list_recipes():
     """Return a small list of example recipes as JSON."""
 
-    example_recipe_1 = [1008, 1022, 1043, 1034]
-    example_recipe_2 = [1001, 1002, 1003, 1004]
+    example_recipes = [
+        {
+            "name": "Pasta with tomato sauce",
+            "ingredients": [1008, 1022, 1043, 1034],
+        }, {
+            "name": "Chicken salad",
+            "ingredients": [1001, 1002, 1003, 1004],
+        }
+    ]
 
-    recipe_1= list(map(get_by_id, example_recipe_1))
-    recipe_2= list(map(get_by_id, example_recipe_2))
+    recipes = []
 
-    return jsonify([recipe_1, recipe_2])
+    for example_recipe in example_recipes:
+        recipe = make_recipe(example_recipe["name"], example_recipe["ingredients"])
+        recipes.append(recipe)
+
+    return jsonify(recipes)
