@@ -5,8 +5,8 @@ export default function Footer(props) {
     return (
 
     <View style={styles.wrapper}>
-        <Text>Sum: {props.sum}</Text>
-        <Text>CO₂: {props.carbon}</Text>
+        <Text style={{fontFamily: "REMA-regular"}}>Sum: {props.sum}</Text>
+        <Text style={{fontFamily: "REMA-regular"}}>CO₂: {props.carbon}</Text>
     </View>
     )
 }
