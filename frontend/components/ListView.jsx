@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Header, Button } from "@rneui/base";
 import ListItem from "./ListItem";
-import Footer from "./Footer";
+import ListFooter from "./ListFooter";
 import CustomHeader from "./CustomHeader";
 import SearchPopup from "./SearchPopup";
 
@@ -77,7 +77,8 @@ export default function ListView(props) {
                 ))}
             </ScrollView>
 
-            <Footer sum={totalPrice.toFixed(2)} carbon={totalCarbonKg.toFixed(2)} style={styles.footer} onSearch={() => setSearchVisible(!searchVisible)} />
+
+            <ListFooter sum={totalPrice.toFixed(2)} carbon={totalCarbonKg.toFixed(2)} style={styles.footer} onSearch={() => setSearchVisible(!searchVisible)} />
         </View>
     );
 }

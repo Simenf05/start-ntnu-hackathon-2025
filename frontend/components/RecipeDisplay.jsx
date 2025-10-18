@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Button } from 'react-native';
 import CustomHeader from './CustomHeader';
+import RecipeFooter from "./RecipeFooter"
 
 // RecipeDisplay fetches recipes from the backend and displays them.
-export default function RecipeDisplay({ backendUrl = 'http://192.168.1.42:5000', onSelectRecipe }) {
+export default function RecipeDisplay({ onAdminPreferences, backendUrl = 'http://192.168.1.42:5000', onSelectRecipe }) {
     const [recipes, setRecipes] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -64,12 +65,26 @@ export default function RecipeDisplay({ backendUrl = 'http://192.168.1.42:5000',
         <View style={styles.fullContainer}>
             <CustomHeader title="Velg Oppskrift" showActionButton={false} />
             <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+                <TouchableOpacity
+                    onPress={() => handleRecipeSelect([])}
+                    style={{
+                        backgroundColor: "#034C8C",
+                        borderRadius: 8,
+                        paddingVertical: 12,
+                        alignItems: "center",
+                        marginTop: 12,
+                        marginBottom: 12,
+                    }}
+                    >
+                    <Text style={{ color: "#fff", fontFamily: "REMA-regular", fontSize: 16 }}>
+                        Start med tom liste
+                    </Text>
+                </TouchableOpacity>
                 {Array.isArray(recipes) && recipes.length > 0 ? (
                     recipes.map((recipe, idx) => (
                         <TouchableOpacity 
                             key={idx} 
                             style={styles.recipeBox}
-                            onPress={() => handleRecipeSelect(recipe)}
                             activeOpacity={0.7}
                         >
                             <Text style={styles.recipeTitle}>{recipe.name || `Oppskrift ${idx + 1}`}</Text>
@@ -80,13 +95,28 @@ export default function RecipeDisplay({ backendUrl = 'http://192.168.1.42:5000',
                             ) : (
                                 <Text style={styles.itemText}>Ingen ingredienser</Text>
                             )}
-                            <Text style={styles.selectText}>Trykk for å velge</Text>
+                            <TouchableOpacity
+                                onPress={() => handleRecipeSelect(recipe)}
+                                style={{
+                                    backgroundColor: "#034C8C",
+                                    borderRadius: 8,
+                                    paddingVertical: 12,
+                                    alignItems: "center",
+                                    marginTop: 12
+                                }}
+                                >
+                                <Text style={{ color: "#fff", fontFamily: "REMA-regular", fontSize: 16 }}>
+                                    Velg oppskrift
+                                </Text>
+                            </TouchableOpacity>
+
                         </TouchableOpacity>
                     ))
                 ) : (
                     <Text style={styles.noRecipes}>Ingen oppskrifter funnet</Text>
                 )}
             </ScrollView>
+            <RecipeFooter onAdminPreferences={onAdminPreferences}></RecipeFooter>
         </View>
     );
 }
@@ -118,13 +148,6 @@ const styles = StyleSheet.create({
         marginBottom: 6, 
         fontFamily: "REMA-regular",
         color: '#ddd'
-    },
-    selectText: {
-        marginTop: 12,
-        fontSize: 14,
-        color: '#183D9F',
-        fontFamily: "REMA-bold",
-        textAlign: 'center'
     },
     noRecipes: {
         color: '#999',
