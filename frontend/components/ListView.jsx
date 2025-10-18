@@ -8,16 +8,16 @@ import CustomHeader from "./CustomHeader";
 export default function ListView(props) {
 
     const handleChangeCount = (id, newCount) => {
-        setListItems((prev) =>
+        props.setListItems((prev) =>
             prev
-                .map((item) => (item.id === id ? { ...item, count: newCount } : item))
+                .map((item) => (item.productId === id ? { ...item, count: newCount } : item))
                 .filter((item) => item.count > 0)
         );
     };
 
     const handleToggleChecked = (id) => {
-        setListItems((prev) =>
-            prev.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item))
+        props.setListItems((prev) =>
+            prev.map((item) => (item.productId === id ? { ...item, checked: !item.checked } : item))
         );
     };
 
@@ -30,8 +30,6 @@ export default function ListView(props) {
             />
 
 
-
-
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 {props.data.map((item) => (
                     <ListItem
@@ -41,10 +39,10 @@ export default function ListView(props) {
                             "" + Math.round(100 * (item.price / item.pricePerUnit)) / 100 + "" + item.unit
                         }
                         price={item.price}
-                        count={item.count}
+                        count={item.count || 1}
                         checked={item.checked || false}
-                        onChangeCount={(newCount) => handleChangeCount(item.id, newCount)}
-                        onToggleChecked={() => handleToggleChecked(item.id)}
+                        onChangeCount={(newCount) => handleChangeCount(item.productId, newCount)}
+                        onToggleChecked={() => handleToggleChecked(item.productId)}
                     />
                 ))}
             </ScrollView>

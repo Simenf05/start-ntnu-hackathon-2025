@@ -55,7 +55,7 @@ export default function App() {
             <SafeAreaView style={[styles.container, {paddingTop: 0}]} >
                 <View style={styles.container}>
                     <StatusBar style="light" />
-                    {data && <ListView data={data} />}
+                    {data && <ListView data={data} setListItems={setListItems} listItems={listItems} />}
                     {/* <RecipeDisplay backendUrl={API_URL} /> */}
                 </View>
             </SafeAreaView>

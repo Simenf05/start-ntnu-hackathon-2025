@@ -15,8 +15,7 @@ const textGray = "#bdbdbd";
 const darkGray = "#808080";
 
 export default function ListItem(props) {
-    // const [checked, setChecked] = React.useState(false)
-    // const toggleChecked = () => setChecked(!checked)
+    // console.log(props)
 
     const [changeVisisble, setChangeVisisble] = useState(false);
 
@@ -24,9 +23,6 @@ export default function ListItem(props) {
     const onToggleChecked  = () => props.onToggleChecked();
 
     const ingredient = props.ingredient;
-
-    // const incrementCount = () => setCount(count + 1)
-    // const decrementCount = () => setCount(count - 1)
 
     return (
         <View style={{ backgroundColor: checked ? "#444" : "#2b2b2b" }}>
