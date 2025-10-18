@@ -31,4 +31,5 @@ def internal_error(error):
     return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Bind to 0.0.0.0 so the API is reachable from other devices on the LAN
+    app.run(debug=True, host='0.0.0.0')

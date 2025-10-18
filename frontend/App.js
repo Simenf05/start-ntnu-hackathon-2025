@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react"
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import ListItem from './components/ListItem'
-
-import { StyleSheet } from "react-native";
+import RecipeDisplay from './components/RecipeDisplay'
 import { useFonts } from "expo-font";
 import ListView from "./components/ListView";
 import { SafeAreaView } from "react-native-safe-area-context"
 
+
 export default function App() {
+
     // Load fonts globally
     const [fontsLoaded] = useFonts({
         "REMA-regular": require("./assets/REMA-Regular.ttf"),
@@ -52,9 +53,8 @@ export default function App() {
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <StatusBar style="auto" />
-
                 {data && <ListView data={data} />}
-
+                <RecipeDisplay backendUrl={API_URL} />
             </View>
         </SafeAreaView>
     )
