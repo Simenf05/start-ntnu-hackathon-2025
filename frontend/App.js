@@ -30,6 +30,7 @@ export default function App() {
             const unit = item.unit || item.Unit || 'stk';
             const pricePerUnit = item.pricePerUnit || item.price_per_unit || price;
             const productId = item.productId || item.product_id || item.id || `${recipeName}-${index}`;
+            const carbonFootprintGram = item.carbonFootprintGram || item.carbon_footprint_gram || 0;
             
             return {
                 productId,
@@ -38,6 +39,7 @@ export default function App() {
                 price,
                 unit,
                 pricePerUnit,
+                carbonFootprintGram,
                 count: 1,
                 checked: false
             };
