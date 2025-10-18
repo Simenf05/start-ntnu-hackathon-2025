@@ -1,6 +1,6 @@
-# Welcome to your Expo app 👋
+# Frontend - NTNU Hackathon 2025 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an [Expo](https://expo.dev) React Native project for the NTNU Hackathon 2025.
 
 ## Get started
 
@@ -10,30 +10,51 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Make sure the Flask backend is running first:
+   
+   ```bash
+   # In the backend directory
+   cd ../backend
+   python app.py
+   ```
+
+3. Start the Expo development server:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. Check if services are running:
+   
+   ```bash
+   # Check Flask backend (port 5000)
+   lsof -i :5000 -sTCP:LISTEN
+   
+   # Check Expo dev server (port 8081)
+   lsof -i :8081 -sTCP:LISTEN
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+In the output, you'll find options to open the app in a:
+
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- [Expo Go](https://expo.dev/go) app on your physical device
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Project Structure
 
-## Get a fresh project
+- **components/** - React components (RecipeDisplay, ListView, Footer, etc.)
+- **assets/** - Images and other static assets
+- **App.js** - Main application entry point
+- **config.js** - Configuration file for API endpoints
 
-When you're ready, run:
+## Backend Integration
 
-```bash
-npm run reset-project
-```
+The app connects to a Flask backend API running on `http://localhost:5000`. Make sure the backend is running before starting the frontend.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### API Endpoints:
+- `/api/test` - Health check
+- `/api/recipes` - Get recipes
+- `/api/barcode` - Barcode scanning functionality
 
 ## Learn more
 
